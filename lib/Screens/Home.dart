@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../Model/Note.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,6 +16,7 @@ class _HomeState extends State<Home> {
   var i  = 0;
   var title  = TextEditingController();
   var note  = TextEditingController();
+  List<Note> notes  = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -85,14 +89,27 @@ class _HomeState extends State<Home> {
                                          )
                                      ),
                                    ),),
-
                                  SizedBox(height: 20.0),
-                                 ElevatedButton(onPressed: (){},
+                                 ElevatedButton(onPressed: (){
+                                     String head  = title.text.trim();
+                                     String nte  = note.text;
+
+                                     if(head.isEmpty && nte.isEmpty){
+                                         Fluttertoast.showToast(msg: "All fields are required",toastLength: Toast.LENGTH_LONG,
+                                             gravity: ToastGravity.BOTTOM,backgroundColor: Colors.black12);
+                                     } else {
+
+                                     }
+
+                                 },
                                    child: Text("Save",textDirection: TextDirection.ltr,),
                                    style: ElevatedButton.styleFrom(
                                      fixedSize: Size(200.0, 20.0),
                                      backgroundColor: Colors.amberAccent,
                                      textStyle: TextStyle(color: Colors.black),
+                                     shape: RoundedRectangleBorder(
+                                       borderRadius: BorderRadius.circular(20.0)
+                                     ),
                                    ),
                                  )
                                ],
@@ -105,10 +122,9 @@ class _HomeState extends State<Home> {
              },
              child: Icon(Icons.add),
        ),
-
-      body: ListView.builder(itemCount: 20,itemBuilder: (BuildContext context,int index){
-
-           return Column(
+      body: notes.isEmpty ? Center(child: Text("ADD NOTES",textDirection: TextDirection.ltr,style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.black26),),) :
+      ListView.builder(itemCount: notes.length,itemBuilder: (BuildContext context,int index){
+           return  Column(
              children:[
                ListTile(
                  onTap: (){},
@@ -124,7 +140,7 @@ class _HomeState extends State<Home> {
                      },
                    ),
                  ),
-                 title:Text("Hello world",textDirection: TextDirection.ltr,),
+                 title:Text(notes[index].title+"  "+notes[index].id,textDirection: TextDirection.ltr,),
                  trailing: IconButton(
                    onPressed: (){},
                    icon: Icon(Icons.delete),
