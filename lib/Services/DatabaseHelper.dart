@@ -15,9 +15,8 @@ class DatabaseHelper{
 
     static Future<Database> _createdb() async {
         return openDatabase(join(await getDatabasesPath(),_dbname,),version: _version,onCreate : (db,version) async{
-                await db.execute("CREATE TABLE $tablename (id INTEGER PRIMARY KEY,title TEXT,notes TEXT)");
+                 await db.execute ("CREATE TABLE $tablename (id INTEGER PRIMARY KEY, title TEXT, note TEXT)");
            }
-
         );
     }
 
@@ -38,14 +37,14 @@ class DatabaseHelper{
          }
     }
 
-    static Future<int> Update(Note note) async{
+    static Future<int> Update(Note note,int id) async{
         final db  = await _createdb();
-        return await db.update(tablename,  note.toMap(), where: 'id = ?', whereArgs: [note.id],conflictAlgorithm: ConflictAlgorithm.replace);
+        return await db.update(tablename,  note.toMap(), where: 'id = ?', whereArgs: [id],conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
-   static Future<int> Delete(Note note)  async{
+   static Future<int> Delete(int id)  async{
       final db  = await _createdb();
-      return await db.delete(tablename,where: 'id = ?', whereArgs: [note.id]);
+      return await db.delete(tablename,where: 'id = ?', whereArgs: [id]);
    }
 
 
