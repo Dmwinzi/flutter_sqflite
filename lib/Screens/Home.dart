@@ -225,7 +225,6 @@ class _HomeState extends State<Home> {
                                        ),),
 
                                        SizedBox(height: 20.0),
-
                                        Padding(padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
                                          child: TextField(
                                            controller: note,
@@ -287,17 +286,6 @@ class _HomeState extends State<Home> {
                        });
                  },
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                 leading: Container(
-                   child: Checkbox(
-                     value: check,
-                     activeColor: Colors.blue,
-                     onChanged: (values){
-                       setState(() {
-                         check  = values;
-                       });
-                     },
-                   ),
-                 ),
                  title:Text(notes[index].id.toString()+"  "+notes[index].title,textDirection: TextDirection.ltr,),
                  trailing: IconButton(
                    onPressed: () async {

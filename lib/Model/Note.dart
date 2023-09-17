@@ -1,5 +1,6 @@
 class Note{
 
+
   int? id;
   var title;
   var note;
@@ -16,7 +17,7 @@ class Note{
     return Note(
       id : json["id"],
       title: json['title'],
-      note:  json['note']
+      note:  json['note'],
     );
   }
 
@@ -24,13 +25,10 @@ class Note{
     return {
       'id' : id,
       'title' : title,
-      'note' : note
+      'note' : note,
     };
   }
 
-  @override
-  String toString() {
-    return 'Note{id: $id, title: $title, note: $note}';
-  }
+
 
 }
